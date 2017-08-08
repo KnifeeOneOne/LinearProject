@@ -22,6 +22,24 @@ class Vector(object):
 
     def __str__(self):
         return 'Vector: {}'.format(self.coordinates)
+    
+    def __iter__(self):
+        self.current = -1
+        return self
+    
+    def __next__(self):
+        self.current +=1
+        if self.current >= self.dimension:
+            raise StopIteration
+        else:
+            return self.coordinates[self.current]
+        
+    def __getitem__(self, key):
+        if key >= self.dimension:
+            raise IndexError
+        else:
+            return self.coordinates[key]
+        
 
 
     def __eq__(self, v):
@@ -37,7 +55,7 @@ class Vector(object):
         return Vector([Decimal(scalar)*x for x in self.coordinates])
     
     def magnitude(self):
-        return sqrt(sum([x**2 for x in self.coordinates]))
+        return Decimal.sqrt(sum([x**2 for x in self.coordinates]))
     
     def normalized(self):
         try:

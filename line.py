@@ -1,6 +1,6 @@
 from decimal import Decimal, getcontext
 
-from vector import Vector
+from Vector import Vector
 
 getcontext().prec = 30
 
@@ -101,7 +101,7 @@ class Line(object):
             return False
         x0 = self.basepoint
         y0 = ell.basepoint
-        basepoint_difference = x0 - y0
+        basepoint_difference = x0.minus(y0)
         
         n = self.normal_vector
         return basepoint_difference.is_orthogonal_to(n)
@@ -142,3 +142,7 @@ class Line(object):
 class MyDecimal(Decimal):
     def is_near_zero(self, eps=1e-10):
         return abs(self) < eps
+
+l1 = Line(Vector(['4.046','2.836']), '1.21')
+l2 = Line(Vector(['10.115','7.09']), '3.025')
+print(l1.intersection_with(l2))
